@@ -1,0 +1,11 @@
+{
+  "listen": "127.0.0.1:19100",
+  "admin_token_env": "KNOX_MANAGEMENT_TOKEN",
+  "knox": {
+    "url": "https://knox.internal.example",
+    "auth_file": "/run/secrets/knox-auth",
+    "ca_file": "/run/certs/knox-ca.pem",
+    "cert_file": "/run/certs/client.pem",
+    "key_file": "/run/certs/client.key"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "listen": ":19100",
+  "admin_token_env": "KNOX_MANAGEMENT_TOKEN",
+  "knox": {"url": "http://knox:9010", "auth_env": "KNOX_DEMO_AUTH", "allow_http": true}
+}

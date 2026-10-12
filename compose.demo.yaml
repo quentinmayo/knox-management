@@ -1,0 +1,23 @@
+name: knox-management-demo
+services:
+  console:
+    build: .
+    command: ["-config", "/config/config.json"]
+    ports: ["127.0.0.1:19100:19100"]
+    environment:
+      KNOX_MANAGEMENT_TOKEN: ${KNOX_MANAGEMENT_TOKEN:?Run python3 scripts/init-demo.py}
+      KNOX_DEMO_AUTH: ${KNOX_DEMO_AUTH:?Run python3 scripts/init-demo.py}
+    volumes: ["./examples/demo.json:/config/config.json:ro"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    depends_on: [knox]
+  knox:
+    build:
+      context: ./integration
+      dockerfile: Dockerfile
+    environment:
+      KNOX_DEMO_AUTH: ${KNOX_DEMO_AUTH:?Run python3 scripts/init-demo.py}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

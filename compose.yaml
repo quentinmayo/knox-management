@@ -1,0 +1,15 @@
+name: knox-management
+services:
+  console:
+    build: .
+    command: ["-config", "/config/config.json"]
+    ports: ["127.0.0.1:19100:19100"]
+    environment:
+      KNOX_MANAGEMENT_TOKEN: ${KNOX_MANAGEMENT_TOKEN:?Set a distinct generated admin token}
+    volumes:
+      - ./.local/config.json:/config/config.json:ro
+      - ./.secrets:/run/secrets:ro
+      - ./.local/certs:/run/certs:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
